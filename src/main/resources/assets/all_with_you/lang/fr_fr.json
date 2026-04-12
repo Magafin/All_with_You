@@ -1,0 +1,8 @@
+{
+  "item.all_with_you.backpack": "Sac à dos",
+  "key.all_with_you.store_in_backpack": "Ranger dans le sac à dos",
+  "key.categories.all_with_you": "All with You",
+  "message.all_with_you.backpack.no_space": "Pas assez d'espace",
+  "message.all_with_you.backpack.full": "Le sac à dos est plein !",
+  "message.all_with_you.backpack.forbidden": "Cet objet ne peut pas être mis dans le sac à dos"
+}
