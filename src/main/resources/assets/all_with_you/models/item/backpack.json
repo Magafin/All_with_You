@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "all_with_you:item/backpack_open"
+  },
+  "overrides": [
+    {
+      "predicate": { "all_with_you:fullness": 0.0001 },
+      "model": "all_with_you:item/backpack_filled"
+    }
+  ]
+}

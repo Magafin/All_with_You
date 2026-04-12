@@ -1,0 +1,9 @@
+{
+  "item.all_with_you.backpack": "Рюкзак",
+
+  "key.all_with_you.store_in_backpack": "Сложено в рюкзак...",
+  "key.categories.all_with_you": "All with You",
+  "message.all_with_you.backpack.no_space": "Недостаточно места...",
+  "message.all_with_you.backpack.full": "Рюкзак заполнен!",
+  "message.all_with_you.backpack.forbidden": "Невозможно положить предмет в рюкзак..."
+}

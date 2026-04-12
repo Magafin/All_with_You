@@ -1,0 +1,9 @@
+{
+  "item.all_with_you.backpack": "Backpack",
+
+  "key.all_with_you.store_in_backpack": "Store in Backpack",
+  "key.categories.all_with_you": "Inception",
+  "message.all_with_you.backpack.no_space": "Not enough space",
+  "message.all_with_you.backpack.full": "Backpack is full!",
+  "message.all_with_you.backpack.forbidden": "This item cannot be put into the backpack"
+}
