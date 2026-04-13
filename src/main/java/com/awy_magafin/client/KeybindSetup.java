@@ -1,7 +1,7 @@
-package com.magafin.client;
+package com.awy_magafin.client;
 
-import com.magafin.common.item.BackpackTooltip;
-import com.magafin.common.network.BackpackStorePayload;
+import com.awy_magafin.common.item.BackpackTooltip;
+import com.awy_magafin.common.network.BackpackStorePayload;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.neoforged.api.distmarker.Dist;

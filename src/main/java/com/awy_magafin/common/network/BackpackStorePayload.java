@@ -1,7 +1,7 @@
-package com.magafin.common.network;
+package com.awy_magafin.common.network;
 
-import com.magafin.common.item.BackpackItem;
-import com.magafin.common.register.ItemsReg;
+import com.awy_magafin.common.item.BackpackItem;
+import com.awy_magafin.common.register.ItemsReg;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

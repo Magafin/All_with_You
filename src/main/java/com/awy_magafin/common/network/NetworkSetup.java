@@ -1,4 +1,4 @@
-package com.magafin.common.network;
+package com.awy_magafin.common.network;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

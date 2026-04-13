@@ -1,8 +1,7 @@
-package com.magafin.client.renderer;
+package com.awy_magafin.client.renderer;
 
-import com.magafin.client.model.BackpackOnPlayer;
-import com.magafin.common.item.BackpackItem;
-import com.magafin.common.register.ItemsReg;
+import com.awy_magafin.client.model.BackpackOnPlayer;
+import com.awy_magafin.common.register.ItemsReg;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;

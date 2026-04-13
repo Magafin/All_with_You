@@ -1,6 +1,6 @@
-package com.magafin.common.item;
+package com.awy_magafin.common.item;
 
-import com.magafin.client.model.BackpackOnPlayer;
+import com.awy_magafin.client.model.BackpackOnPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
@@ -12,7 +12,6 @@ import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.ChatFormatting;
-import net.minecraft.world.item.component.DyedItemColor;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.LivingEntity;

@@ -1,7 +1,7 @@
-package com.magafin.client;
+package com.awy_magafin.client;
 
-import com.magafin.common.item.BackpackItem;
-import com.magafin.common.item.BackpackTooltip;
+import com.awy_magafin.common.item.BackpackItem;
+import com.awy_magafin.common.item.BackpackTooltip;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;

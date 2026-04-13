@@ -1,6 +1,6 @@
-package com.magafin.common.handler;
+package com.awy_magafin.common.handler;
 
-import com.magafin.common.register.ItemsReg;
+import com.awy_magafin.common.register.ItemsReg;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;

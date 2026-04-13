@@ -1,6 +1,6 @@
-package com.magafin.all_with_you;
+package com.awy_magafin.all_with_you;
 
-import com.magafin.common.register.ItemsReg;
+import com.awy_magafin.common.register.ItemsReg;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -16,7 +16,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
-import static com.magafin.common.register.ItemsReg.ITEMS;
+import static com.awy_magafin.common.register.ItemsReg.ITEMS;
 
 @Mod(All_with_you.MODID)
 public class All_with_you {
