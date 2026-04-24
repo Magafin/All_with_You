@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.awy_magafin.all_with_you.mixin",
+  "package": "com.magafin.allwithyou.all_with_you.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
   ],

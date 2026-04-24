@@ -1,4 +1,4 @@
-package com.awy_magafin.common.item;
+package com.magafin.allwithyou.common.item;
 
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.component.BundleContents;

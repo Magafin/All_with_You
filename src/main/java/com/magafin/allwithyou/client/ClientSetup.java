@@ -1,9 +1,9 @@
-package com.awy_magafin.client;
+package com.magafin.allwithyou.client;
 
-import com.awy_magafin.client.model.BackpackOnPlayer;
-import com.awy_magafin.client.renderer.BackpackLayer;
-import com.awy_magafin.common.item.BackpackItem;
-import com.awy_magafin.common.register.ItemsReg;
+import com.magafin.allwithyou.client.model.BackpackOnPlayer;
+import com.magafin.allwithyou.client.renderer.BackpackLayer;
+import com.magafin.allwithyou.common.item.BackpackItem;
+import com.magafin.allwithyou.common.register.ItemsReg;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;

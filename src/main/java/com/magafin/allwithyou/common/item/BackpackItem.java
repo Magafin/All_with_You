@@ -1,6 +1,6 @@
-package com.awy_magafin.common.item;
+package com.magafin.allwithyou.common.item;
 
-import com.awy_magafin.client.model.BackpackOnPlayer;
+import com.magafin.allwithyou.client.model.BackpackOnPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;

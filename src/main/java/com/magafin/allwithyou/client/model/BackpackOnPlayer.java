@@ -1,4 +1,4 @@
-package com.awy_magafin.client.model;
+package com.magafin.allwithyou.client.model;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
