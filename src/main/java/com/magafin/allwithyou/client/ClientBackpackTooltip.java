@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import com.magafin.allwithyou.common.config.Config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +65,7 @@ public class ClientBackpackTooltip implements ClientTooltipComponent {
 
     private void renderSlot(int x, int y, int index, List<ItemStack> items, GuiGraphics graphics, Font font) {
         if (index >= items.size()) {
-            if (this.totalWeight >= 256) {
+            if (this.totalWeight >= Config.BACKPACK_CAPACITY.get()) {
                 graphics.blitSprite(BLOCKED_SLOT_SPRITE, x, y, 18, 20);
             } else {
                 graphics.blitSprite(SLOT_SPRITE, x, y, 18, 20);

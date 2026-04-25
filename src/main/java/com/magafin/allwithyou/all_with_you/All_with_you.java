@@ -15,6 +15,8 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
+import net.neoforged.fml.config.ModConfig;
+import com.magafin.allwithyou.common.config.Config;
 
 import static com.magafin.allwithyou.common.register.ItemsReg.ITEMS;
 
@@ -30,6 +32,7 @@ public class All_with_you {
 
         ITEMS.register(modEventBus);
         modEventBus.addListener(this::addCreative);
+        modContainer.registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

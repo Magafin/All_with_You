@@ -2,6 +2,7 @@ package com.magafin.allwithyou.client;
 
 import com.magafin.allwithyou.client.model.BackpackOnPlayer;
 import com.magafin.allwithyou.client.renderer.BackpackLayer;
+import com.magafin.allwithyou.common.config.Config;
 import com.magafin.allwithyou.common.item.BackpackItem;
 import com.magafin.allwithyou.common.register.ItemsReg;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -24,10 +25,10 @@ public class ClientSetup {
                     (stack, level, entity, seed) -> {
                         int currentWeight = BackpackItem.getContentsWeight(stack);
                         if (currentWeight <= 0) {
-                            return 0.0F; // Если пустой — возвращаем строго 0, полоска исчезнет
+                            return 0.0F;
                         }
-                        // Если есть хоть один предмет, считаем процент заполнения
-                        return Math.max(0.01F, (float) currentWeight / 256.0F);
+                        float maxCapacity = (float) Config.BACKPACK_CAPACITY.get();
+                        return Math.max(0.01F, (float) currentWeight / maxCapacity);
                     }
             );
         });

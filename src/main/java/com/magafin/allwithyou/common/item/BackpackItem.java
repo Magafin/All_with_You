@@ -1,6 +1,7 @@
 package com.magafin.allwithyou.common.item;
 
 import com.magafin.allwithyou.client.model.BackpackOnPlayer;
+import com.magafin.allwithyou.common.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
@@ -22,10 +23,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class BackpackItem extends BundleItem implements Equipable {
-    private static final int MAX_CAPACITY = 256;
+
 
     public BackpackItem(Properties properties) {
-        super(properties); // Возвращаем обычный конструктор
+        super(properties);
     }
 
     @Override
@@ -67,7 +68,7 @@ public class BackpackItem extends BundleItem implements Equipable {
                 return true;
             }
         }
-        
+
         return super.overrideStackedOnOther(stack, slot, action, player);
     }
     @Override
@@ -105,7 +106,7 @@ public class BackpackItem extends BundleItem implements Equipable {
 
         int currentWeight = getContentsWeight(currentItems);
         int itemWeight = getWeight(stack);
-        int remainingWeight = MAX_CAPACITY - currentWeight;
+        int remainingWeight = Config.BACKPACK_CAPACITY.get() - currentWeight;
 
         if (remainingWeight < itemWeight) return 0;
 
@@ -154,7 +155,7 @@ public class BackpackItem extends BundleItem implements Equipable {
         contents.items().forEach(items::add);
 
         int currentWeight = getContentsWeight(backpack);
-        int spaceLeft = MAX_CAPACITY - currentWeight;
+        int spaceLeft = Config.BACKPACK_CAPACITY.get() - currentWeight;
 
         if (spaceLeft <= 0) return toInsert;
 
@@ -229,7 +230,9 @@ public class BackpackItem extends BundleItem implements Equipable {
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        return Math.min(1 + 12 * getContentsWeight(stack) / MAX_CAPACITY, 13);
+        // Рассчитываем ширину полоски (максимум 13 пикселей в ванилле)
+        // Используем значение из конфига вместо 256 или 64
+        return Math.min(13, (int) Math.ceil(13.0D * (double) getContentsWeight(stack) / (double) Config.BACKPACK_CAPACITY.get()));
     }
 
     @Override
@@ -251,7 +254,8 @@ public class BackpackItem extends BundleItem implements Equipable {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         int currentWeight = getContentsWeight(stack);
-        tooltipComponents.add(Component.translatable("item.minecraft.bundle.fullness", currentWeight, MAX_CAPACITY).withStyle(ChatFormatting.GRAY));
+        int maxCapacity = Config.BACKPACK_CAPACITY.get(); // БЕРЕМ ИЗ КОНФИГА
+        tooltipComponents.add(Component.translatable("item.minecraft.bundle.fullness", currentWeight, maxCapacity).withStyle(ChatFormatting.GRAY));
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
