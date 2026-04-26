@@ -33,7 +33,6 @@ public class BackpackItem extends BundleItem implements Equipable {
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, net.minecraft.world.inventory.Slot slot, net.minecraft.world.inventory.ClickAction action, net.minecraft.world.entity.player.Player player, net.minecraft.world.entity.SlotAccess slotAccess) {
         if (action == net.minecraft.world.inventory.ClickAction.SECONDARY && slot.allowModification(player)) {
             if (other.isEmpty()) {
-                // Игрок кликает по рюкзаку пустой рукой (курсором) -> Извлекаем выбранный предмет
                 Optional<ItemStack> removed = removeSelectedItem(stack);
                 removed.ifPresent(itemStack -> {
                     player.playSound(net.minecraft.sounds.SoundEvents.BUNDLE_REMOVE_ONE, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
@@ -62,7 +61,6 @@ public class BackpackItem extends BundleItem implements Equipable {
 
         int selectedIndex = backpack.getOrDefault(com.magafin.allwithyou.common.register.DataComponentsReg.SELECTED_ITEM_INDEX.get(), 0);
 
-        // Защита от выхода за пределы массива
         if (selectedIndex < 0 || selectedIndex >= currentItems.size()) {
             selectedIndex = 0;
         }
@@ -70,7 +68,6 @@ public class BackpackItem extends BundleItem implements Equipable {
         ItemStack removed = currentItems.remove(selectedIndex);
         backpack.set(DataComponents.BUNDLE_CONTENTS, new BundleContents(currentItems));
 
-        // Смещаем индекс, если удалили последний предмет в списке, чтобы не было краша при следующем клике
         if (selectedIndex >= currentItems.size() && !currentItems.isEmpty()) {
             backpack.set(com.magafin.allwithyou.common.register.DataComponentsReg.SELECTED_ITEM_INDEX.get(), currentItems.size() - 1);
         } else if (currentItems.isEmpty()) {
@@ -85,7 +82,6 @@ public class BackpackItem extends BundleItem implements Equipable {
         if (action == net.minecraft.world.inventory.ClickAction.SECONDARY && slot.allowModification(player)) {
             ItemStack itemInSlot = slot.getItem();
             if (itemInSlot.isEmpty()) {
-                // Игрок кликает рюкзаком по пустому слоту -> Выкладываем выбранный предмет
                 Optional<ItemStack> removed = removeSelectedItem(stack);
                 removed.ifPresent(itemStack -> {
                     player.playSound(net.minecraft.sounds.SoundEvents.BUNDLE_REMOVE_ONE, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
@@ -266,8 +262,6 @@ public class BackpackItem extends BundleItem implements Equipable {
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        // Рассчитываем ширину полоски (максимум 13 пикселей в ванилле)
-        // Используем значение из конфига вместо 256 или 64
         return Math.min(13, (int) Math.ceil(13.0D * (double) getContentsWeight(stack) / (double) Config.BACKPACK_CAPACITY.get()));
     }
 

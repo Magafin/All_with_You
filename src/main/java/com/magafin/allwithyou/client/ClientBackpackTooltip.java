@@ -12,11 +12,11 @@ import com.magafin.allwithyou.common.config.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ClientBackpackTooltip implements ClientTooltipComponent {
-    private static final ResourceLocation BACKGROUND_SPRITE = ResourceLocation.withDefaultNamespace("container/bundle/background");
-    private static final ResourceLocation SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/bundle/slot");
-    private static final ResourceLocation BLOCKED_SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/bundle/blocked_slot");
+    private static final ResourceLocation BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath("all_with_you", "tooltip/backpack_background");
+    private static final ResourceLocation SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath("all_with_you", "tooltip/backpack_slot");
+    private static final ResourceLocation BLOCKED_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath("all_with_you", "tooltip/backpack_blocked_slot");
+    private static final ResourceLocation SELECTED_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath("all_with_you", "tooltip/backpack_selected_slot");
 
     private final BackpackTooltip tooltip;
     private final List<ItemStack> items = new ArrayList<>();
@@ -75,14 +75,14 @@ public class ClientBackpackTooltip implements ClientTooltipComponent {
             }
         } else {
             ItemStack stack = items.get(index);
+
             graphics.blitSprite(SLOT_SPRITE, x, y, 18, 20);
+
             graphics.renderItem(stack, x + 1, y + 1);
             graphics.renderItemDecorations(font, stack, x + 1, y + 1);
 
-            // --- ДОБАВЛЕНО: Белое выделение для выбранного слота ---
             if (index == this.selectedIndex) {
-                // Рисуем белый полупрозрачный квадрат (0x80FFFFFF)
-                graphics.fill(x + 1, y + 1, x + 17, y + 17, 0x80FFFFFF);
+                graphics.blitSprite(SELECTED_SLOT_SPRITE, x, y, 18, 20);
             }
         }
     }

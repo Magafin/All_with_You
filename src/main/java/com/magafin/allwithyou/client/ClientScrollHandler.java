@@ -31,7 +31,6 @@ public class ClientScrollHandler {
 
                     int newIndex = currentIndex - delta;
 
-                    // Зацикливаем выбор
                     if (newIndex < 0) {
                         newIndex = contents.size() - 1;
                     } else if (newIndex >= contents.size()) {
@@ -40,11 +39,10 @@ public class ClientScrollHandler {
 
                     if (currentIndex != newIndex) {
                         PacketDistributor.sendToServer(new BackpackScrollPayload(slot.index, newIndex));
-                        // Мгновенно обновляем на клиенте для плавности визуала
                         backpack.set(DataComponentsReg.SELECTED_ITEM_INDEX.get(), newIndex);
                     }
 
-                    event.setCanceled(true); // Блокируем стандартную прокрутку (например, в JEI)
+                    event.setCanceled(true);
                 }
             }
         }

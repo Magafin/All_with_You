@@ -37,7 +37,6 @@ public record BackpackScrollPayload(int slotId, int newIndex) implements CustomP
                 Slot slot = menu.slots.get(payload.slotId());
                 ItemStack stack = slot.getItem();
 
-                // Проверяем, что в слоте действительно рюкзак, и обновляем индекс
                 if (stack.getItem() instanceof BackpackItem) {
                     stack.set(DataComponentsReg.SELECTED_ITEM_INDEX.get(), payload.newIndex());
                 }
