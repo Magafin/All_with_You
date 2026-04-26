@@ -12,6 +12,7 @@ import com.magafin.allwithyou.common.config.Config;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ClientBackpackTooltip implements ClientTooltipComponent {
     private static final ResourceLocation BACKGROUND_SPRITE = ResourceLocation.withDefaultNamespace("container/bundle/background");
     private static final ResourceLocation SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/bundle/slot");
@@ -20,12 +21,14 @@ public class ClientBackpackTooltip implements ClientTooltipComponent {
     private final BackpackTooltip tooltip;
     private final List<ItemStack> items = new ArrayList<>();
     private final int totalWeight;
+    private final int selectedIndex;
 
     public ClientBackpackTooltip(BackpackTooltip tooltip) {
         this.tooltip = tooltip;
         tooltip.contents().items().forEach(this.items::add);
 
         this.totalWeight = BackpackItem.getContentsWeight(this.items);
+        this.selectedIndex = tooltip.selectedIndex();
     }
 
     @Override
@@ -75,6 +78,12 @@ public class ClientBackpackTooltip implements ClientTooltipComponent {
             graphics.blitSprite(SLOT_SPRITE, x, y, 18, 20);
             graphics.renderItem(stack, x + 1, y + 1);
             graphics.renderItemDecorations(font, stack, x + 1, y + 1);
+
+            // --- ДОБАВЛЕНО: Белое выделение для выбранного слота ---
+            if (index == this.selectedIndex) {
+                // Рисуем белый полупрозрачный квадрат (0x80FFFFFF)
+                graphics.fill(x + 1, y + 1, x + 17, y + 17, 0x80FFFFFF);
+            }
         }
     }
 

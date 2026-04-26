@@ -3,5 +3,5 @@ package com.magafin.allwithyou.common.item;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.component.BundleContents;
 
-public record BackpackTooltip(BundleContents contents) implements TooltipComponent {
+public record BackpackTooltip(BundleContents contents, int selectedIndex) implements TooltipComponent {
 }

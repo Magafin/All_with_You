@@ -10,10 +10,16 @@ public class NetworkSetup {
     @SubscribeEvent
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1.0");
+
         registrar.playToServer(
                 BackpackStorePayload.TYPE,
                 BackpackStorePayload.CODEC,
                 BackpackStorePayload::handle
+        );
+        registrar.playToServer(
+                BackpackScrollPayload.TYPE,
+                BackpackScrollPayload.CODEC,
+                BackpackScrollPayload::handle
         );
     }
 }

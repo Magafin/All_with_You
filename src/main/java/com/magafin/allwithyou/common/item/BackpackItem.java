@@ -31,50 +31,86 @@ public class BackpackItem extends BundleItem implements Equipable {
 
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, net.minecraft.world.inventory.Slot slot, net.minecraft.world.inventory.ClickAction action, net.minecraft.world.entity.player.Player player, net.minecraft.world.entity.SlotAccess slotAccess) {
-        if (action == net.minecraft.world.inventory.ClickAction.SECONDARY) {
+        if (action == net.minecraft.world.inventory.ClickAction.SECONDARY && slot.allowModification(player)) {
             if (other.isEmpty()) {
-                return super.overrideOtherStackedOnMe(stack, other, slot, action, player, slotAccess);
+                // Игрок кликает по рюкзаку пустой рукой (курсором) -> Извлекаем выбранный предмет
+                Optional<ItemStack> removed = removeSelectedItem(stack);
+                removed.ifPresent(itemStack -> {
+                    player.playSound(net.minecraft.sounds.SoundEvents.BUNDLE_REMOVE_ONE, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
+                    slotAccess.set(itemStack);
+                });
+                return true;
             } else {
                 if (isForbiddenContainer(other)) return true;
-
                 int initialCount = other.getCount();
                 customInsert(stack, other);
-
                 if (other.getCount() < initialCount) {
                     player.playSound(net.minecraft.sounds.SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 }
                 return true;
             }
         }
-        return super.overrideOtherStackedOnMe(stack, other, slot, action, player, slotAccess);
+        return false;
+    }
+
+    private Optional<ItemStack> removeSelectedItem(ItemStack backpack) {
+        BundleContents contents = backpack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+        if (contents.isEmpty()) return Optional.empty();
+
+        List<ItemStack> currentItems = new ArrayList<>();
+        contents.items().forEach(item -> currentItems.add(item.copy()));
+
+        int selectedIndex = backpack.getOrDefault(com.magafin.allwithyou.common.register.DataComponentsReg.SELECTED_ITEM_INDEX.get(), 0);
+
+        // Защита от выхода за пределы массива
+        if (selectedIndex < 0 || selectedIndex >= currentItems.size()) {
+            selectedIndex = 0;
+        }
+
+        ItemStack removed = currentItems.remove(selectedIndex);
+        backpack.set(DataComponents.BUNDLE_CONTENTS, new BundleContents(currentItems));
+
+        // Смещаем индекс, если удалили последний предмет в списке, чтобы не было краша при следующем клике
+        if (selectedIndex >= currentItems.size() && !currentItems.isEmpty()) {
+            backpack.set(com.magafin.allwithyou.common.register.DataComponentsReg.SELECTED_ITEM_INDEX.get(), currentItems.size() - 1);
+        } else if (currentItems.isEmpty()) {
+            backpack.set(com.magafin.allwithyou.common.register.DataComponentsReg.SELECTED_ITEM_INDEX.get(), 0);
+        }
+
+        return Optional.of(removed);
     }
 
     @Override
     public boolean overrideStackedOnOther(ItemStack stack, net.minecraft.world.inventory.Slot slot, net.minecraft.world.inventory.ClickAction action, net.minecraft.world.entity.player.Player player) {
-        if (action == net.minecraft.world.inventory.ClickAction.SECONDARY) {
+        if (action == net.minecraft.world.inventory.ClickAction.SECONDARY && slot.allowModification(player)) {
             ItemStack itemInSlot = slot.getItem();
             if (itemInSlot.isEmpty()) {
-                return super.overrideStackedOnOther(stack, slot, action, player);
+                // Игрок кликает рюкзаком по пустому слоту -> Выкладываем выбранный предмет
+                Optional<ItemStack> removed = removeSelectedItem(stack);
+                removed.ifPresent(itemStack -> {
+                    player.playSound(net.minecraft.sounds.SoundEvents.BUNDLE_REMOVE_ONE, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
+                    slot.set(itemStack);
+                });
+                return true;
             } else {
                 if (isForbiddenContainer(itemInSlot)) return true;
-
                 int initialCount = itemInSlot.getCount();
                 customInsert(stack, itemInSlot);
-
                 if (itemInSlot.getCount() < initialCount) {
                     player.playSound(net.minecraft.sounds.SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
-                    slot.set(itemInSlot);
                 }
                 return true;
             }
         }
-
-        return super.overrideStackedOnOther(stack, slot, action, player);
+        return false;
     }
+
     @Override
     public java.util.Optional<net.minecraft.world.inventory.tooltip.TooltipComponent> getTooltipImage(ItemStack stack) {
-        return Optional.of(new BackpackTooltip(stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)));
+        int selectedIndex = stack.getOrDefault(com.magafin.allwithyou.common.register.DataComponentsReg.SELECTED_ITEM_INDEX.get(), 0);
+        return Optional.of(new BackpackTooltip(stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY), selectedIndex));
     }
+
     public static boolean isForbiddenContainer(ItemStack stack) {
         if (stack.isEmpty()) return false;
 

@@ -1,5 +1,6 @@
 package com.magafin.allwithyou.all_with_you;
 
+import com.magafin.allwithyou.common.register.DataComponentsReg;
 import com.magafin.allwithyou.common.register.ItemsReg;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -33,6 +34,7 @@ public class All_with_you {
         ITEMS.register(modEventBus);
         modEventBus.addListener(this::addCreative);
         modContainer.registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
+        DataComponentsReg.COMPONENTS.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
