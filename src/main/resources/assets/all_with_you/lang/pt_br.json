@@ -1,0 +1,9 @@
+{
+  "item.all_with_you.backpack": "Mochila",
+
+  "key.all_with_you.store_in_backpack": "Guarde na sua mochila",
+  "key.categories.all_with_you": "Tudo Contigo",
+  "message.all_with_you.backpack.no_space": "Espaço insuficiente",
+  "message.all_with_you.backpack.full": "A mochila está cheia!",
+  "message.all_with_you.backpack.forbidden": "Este item não pode ser colocado na mochila"
+}

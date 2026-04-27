@@ -9,9 +9,23 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackLocationInfo;
+import net.minecraft.server.packs.PackSelectionConfig;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.PathPackResources;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackSource;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.event.AddPackFindersEvent;
+import java.nio.file.Path;
+import java.util.Map;
+import java.util.Optional;
 
 @EventBusSubscriber(modid = "all_with_you", bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
@@ -56,5 +70,38 @@ public class ClientSetup {
             livingRenderer.addLayer(armorStandLayer);
         }
 
+    }
+    @SubscribeEvent
+    public static void addBuiltInPacks(AddPackFindersEvent event) {
+        if (event.getPackType() == PackType.CLIENT_RESOURCES) {
+            String modId = "all_with_you";
+
+            // Список всех твоих паков: "папка" -> "Название в игре"
+            Map<String, String> packs = Map.of(
+                    "nomansland_compat", "All with You: No Man's Land",
+                    "darkmode", "All with You: Dark Mode",
+                    "default", "All with You: Default Mode"
+            );
+
+            packs.forEach((folderName, displayName) -> {
+                Path resourcePath = ModList.get().getModFileById(modId).getFile().findResource("resourcepacks/" + folderName);
+
+                Pack pack = Pack.readMetaAndCreate(
+                        new PackLocationInfo(
+                                modId + ":" + folderName,
+                                Component.literal(displayName),
+                                PackSource.BUILT_IN,
+                                Optional.empty()
+                        ),
+                        new PathPackResources.PathResourcesSupplier(resourcePath),
+                        PackType.CLIENT_RESOURCES,
+                        new PackSelectionConfig(false, Pack.Position.BOTTOM, false)
+                );
+
+                if (pack != null) {
+                    event.addRepositorySource(infoConsumer -> infoConsumer.accept(pack));
+                }
+            });
+        }
     }
 }
