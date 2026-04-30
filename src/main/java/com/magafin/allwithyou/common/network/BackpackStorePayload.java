@@ -30,7 +30,6 @@ public record BackpackStorePayload() implements CustomPacketPayload {
             if (chestStack.is(ItemsReg.BACKPACK.get())) {
 
                 ItemStack mainHand = player.getMainHandItem();
-                if (mainHand.isEmpty()) return;
 
                 if (BackpackItem.isForbiddenContainer(mainHand)) {
                     player.displayClientMessage(
@@ -39,6 +38,8 @@ public record BackpackStorePayload() implements CustomPacketPayload {
                     );
                     return;
                 }
+
+                if (mainHand.isEmpty()) return;
 
                 int initialCount = mainHand.getCount();
 

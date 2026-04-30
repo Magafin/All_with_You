@@ -38,9 +38,9 @@ public class BackpackItem extends BundleItem implements Equipable {
                     player.playSound(net.minecraft.sounds.SoundEvents.BUNDLE_REMOVE_ONE, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                     slotAccess.set(itemStack);
                 });
+                if (isForbiddenContainer(other)) return true;
                 return true;
             } else {
-                if (isForbiddenContainer(other)) return true;
                 int initialCount = other.getCount();
                 customInsert(stack, other);
                 if (other.getCount() < initialCount) {
@@ -77,10 +77,30 @@ public class BackpackItem extends BundleItem implements Equipable {
         return Optional.of(removed);
     }
 
+    public static boolean isForbiddenContainer(ItemStack stack) {
+        if (stack.isEmpty()) return false;
+
+        // 1. Самая важная ванильная проверка.
+        // Она возвращает 'false' для Шалкеров, поэтому мы инвертируем (!).
+        if (!stack.getItem().canFitInsideContainerItems()) {
+            return true;
+        }
+
+        // 2. Запрещаем класть мешочки в мешочки (и рюкзаки в рюкзаки).
+        // Так как твой BackpackItem наследуется от BundleItem, это условие
+        // автоматически запретит класть и ванильные мешочки, и твои рюкзаки друг в друга.
+        if (stack.getItem() instanceof net.minecraft.world.item.BundleItem) {
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     public boolean overrideStackedOnOther(ItemStack stack, net.minecraft.world.inventory.Slot slot, net.minecraft.world.inventory.ClickAction action, net.minecraft.world.entity.player.Player player) {
         if (action == net.minecraft.world.inventory.ClickAction.SECONDARY && slot.allowModification(player)) {
             ItemStack itemInSlot = slot.getItem();
+            if (isForbiddenContainer(itemInSlot)) return true;
             if (itemInSlot.isEmpty()) {
                 Optional<ItemStack> removed = removeSelectedItem(stack);
                 removed.ifPresent(itemStack -> {
@@ -89,7 +109,6 @@ public class BackpackItem extends BundleItem implements Equipable {
                 });
                 return true;
             } else {
-                if (isForbiddenContainer(itemInSlot)) return true;
                 int initialCount = itemInSlot.getCount();
                 customInsert(stack, itemInSlot);
                 if (itemInSlot.getCount() < initialCount) {
@@ -105,20 +124,6 @@ public class BackpackItem extends BundleItem implements Equipable {
     public java.util.Optional<net.minecraft.world.inventory.tooltip.TooltipComponent> getTooltipImage(ItemStack stack) {
         int selectedIndex = stack.getOrDefault(com.magafin.allwithyou.common.register.DataComponentsReg.SELECTED_ITEM_INDEX.get(), 0);
         return Optional.of(new BackpackTooltip(stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY), selectedIndex));
-    }
-
-    public static boolean isForbiddenContainer(ItemStack stack) {
-        if (stack.isEmpty()) return false;
-
-        if (stack.getItem() instanceof net.minecraft.world.item.BundleItem) {
-            return true;
-        }
-
-        if (stack.has(net.minecraft.core.component.DataComponents.CONTAINER)) {
-            return true;
-        }
-
-        return false;
     }
 
     @Override
@@ -181,6 +186,10 @@ public class BackpackItem extends BundleItem implements Equipable {
     }
     public static ItemStack customInsert(ItemStack backpack, ItemStack toInsert) {
         if (toInsert.isEmpty() || isForbiddenContainer(toInsert)) return toInsert;
+
+        if (toInsert.isEmpty() || isForbiddenContainer(toInsert)) {
+            return toInsert;
+        }
 
         net.minecraft.world.item.component.BundleContents contents = backpack.getOrDefault(net.minecraft.core.component.DataComponents.BUNDLE_CONTENTS, net.minecraft.world.item.component.BundleContents.EMPTY);
         java.util.List<ItemStack> items = new java.util.ArrayList<>();
