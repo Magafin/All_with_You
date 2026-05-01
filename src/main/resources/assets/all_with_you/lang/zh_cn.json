@@ -1,0 +1,9 @@
+{
+  "item.all_with_you.backpack": "小背包",
+
+  "key.all_with_you.store_in_backpack": "存入你的小背包中",
+  "key.categories.all_with_you": "与你同在",
+  "message.all_with_you.backpack.no_space": "没有足够的空间",
+  "message.all_with_you.backpack.full": "小背包满了！",
+  "message.all_with_you.backpack.forbidden": "这个物品无法放入小背包"
+}
