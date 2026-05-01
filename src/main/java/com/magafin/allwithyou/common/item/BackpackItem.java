@@ -1,9 +1,11 @@
 package com.magafin.allwithyou.common.item;
 
 import com.magafin.allwithyou.client.model.BackpackOnPlayer;
+import com.magafin.allwithyou.common.advancements.ModTriggers;
 import com.magafin.allwithyou.common.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BundleItem;
@@ -42,7 +44,7 @@ public class BackpackItem extends BundleItem implements Equipable {
                 return true;
             } else {
                 int initialCount = other.getCount();
-                customInsert(stack, other);
+                customInsert(stack, other, player);
                 if (other.getCount() < initialCount) {
                     player.playSound(net.minecraft.sounds.SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 }
@@ -110,7 +112,7 @@ public class BackpackItem extends BundleItem implements Equipable {
                 return true;
             } else {
                 int initialCount = itemInSlot.getCount();
-                customInsert(stack, itemInSlot);
+                customInsert(stack, itemInSlot, player);
                 if (itemInSlot.getCount() < initialCount) {
                     player.playSound(net.minecraft.sounds.SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + player.level().getRandom().nextFloat() * 0.4F);
                 }
@@ -184,19 +186,17 @@ public class BackpackItem extends BundleItem implements Equipable {
         }
         return weight;
     }
-    public static ItemStack customInsert(ItemStack backpack, ItemStack toInsert) {
+    public static ItemStack customInsert(ItemStack backpack, ItemStack toInsert, Player serverPlayer) {
         if (toInsert.isEmpty() || isForbiddenContainer(toInsert)) return toInsert;
 
-        if (toInsert.isEmpty() || isForbiddenContainer(toInsert)) {
-            return toInsert;
-        }
+        int maxCapacity = Config.BACKPACK_CAPACITY.get();
 
         net.minecraft.world.item.component.BundleContents contents = backpack.getOrDefault(net.minecraft.core.component.DataComponents.BUNDLE_CONTENTS, net.minecraft.world.item.component.BundleContents.EMPTY);
         java.util.List<ItemStack> items = new java.util.ArrayList<>();
         contents.items().forEach(items::add);
 
         int currentWeight = getContentsWeight(backpack);
-        int spaceLeft = Config.BACKPACK_CAPACITY.get() - currentWeight;
+        int spaceLeft = maxCapacity - currentWeight;
 
         if (spaceLeft <= 0) return toInsert;
 
@@ -228,6 +228,11 @@ public class BackpackItem extends BundleItem implements Equipable {
 
         backpack.set(net.minecraft.core.component.DataComponents.BUNDLE_CONTENTS, new net.minecraft.world.item.component.BundleContents(items));
         toInsert.shrink(Math.min(toInsert.getCount(), maxItemsToInsert));
+
+        // Проверка достижения после вставки: если вес достиг лимита[cite: 18]
+        if (getContentsWeight(backpack) >= maxCapacity && serverPlayer instanceof ServerPlayer sPlayer) {
+            ModTriggers.FULL_BACKPACK.trigger(sPlayer);
+        }
 
         return toInsert;
     }

@@ -43,7 +43,7 @@ public record BackpackStorePayload() implements CustomPacketPayload {
 
                 int initialCount = mainHand.getCount();
 
-                BackpackItem.customInsert(chestStack, mainHand);
+                BackpackItem.customInsert(chestStack, mainHand, player);
 
                 if (mainHand.getCount() < initialCount) {
                     player.level().playSound(

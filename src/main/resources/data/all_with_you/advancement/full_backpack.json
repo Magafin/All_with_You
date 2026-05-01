@@ -1,0 +1,22 @@
+{
+  "parent": "all_with_you:obtain_backpack",
+  "display": {
+    "icon": {
+      "id": "all_with_you:backpack"
+    },
+    "title": { "translate": "advancements.all_with_you.full_backpack.title" },
+    "description": { "translate": "advancements.all_with_you.full_backpack.description" },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "is_full": {
+      "trigger": "all_with_you:full_backpack"
+    }
+  },
+  "rewards": {
+    "experience": 50
+  }
+}

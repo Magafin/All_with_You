@@ -5,5 +5,9 @@
   "key.categories.all_with_you": "All with You",
   "message.all_with_you.backpack.no_space": "Недостаточно места...",
   "message.all_with_you.backpack.full": "Рюкзак заполнен!",
-  "message.all_with_you.backpack.forbidden": "Невозможно положить предмет в рюкзак..."
+  "message.all_with_you.backpack.forbidden": "Невозможно положить предмет в рюкзак...",
+  "advancements.all_with_you.obtain_backpack.title": "Все свое ношу с собой...",
+  "advancements.all_with_you.obtain_backpack.description": "Скрафтите или найдите рюкзак",
+  "advancements.all_with_you.full_backpack.title": "Предел возможностей!",
+  "advancements.all_with_you.full_backpack.description": "Заполните рюкзак до отказа"
 }

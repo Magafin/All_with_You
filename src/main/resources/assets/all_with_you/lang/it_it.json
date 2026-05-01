@@ -5,5 +5,9 @@
   "key.categories.all_with_you": "All with You",
   "message.all_with_you.backpack.no_space": "Lo zaino non ha abbastanza spazio",
   "message.all_with_you.backpack.full": "Lo zaino è pieno!",
-  "message.all_with_you.backpack.forbidden": "Questo oggetto non può essere depositato nello zaino"
+  "message.all_with_you.backpack.forbidden": "Questo oggetto non può essere depositato nello zaino",
+  "advancements.all_with_you.obtain_backpack.title": "All with me",
+  "advancements.all_with_you.obtain_backpack.description": "Obtain a Backpack",
+  "advancements.all_with_you.full_backpack.title": "Full Limits",
+  "advancements.all_with_you.full_backpack.description": "Pack your backpack to the brim"
 }

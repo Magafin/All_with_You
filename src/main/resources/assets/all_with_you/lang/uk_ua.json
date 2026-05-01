@@ -1,0 +1,13 @@
+{
+  "item.all_with_you.backpack": "Рюкзак",
+
+  "key.all_with_you.store_in_backpack": "Складено в рюкзак...",
+  "key.categories.all_with_you": "All with You",
+  "message.all_with_you.backpack.no_space": "Недостатньо місця...",
+  "message.all_with_you.backpack.full": "Рюкзак заповнений!",
+  "message.all_with_you.backpack.forbidden": "Неможливо покласти предмет у рюкзак...",
+  "advancements.all_with_you.obtain_backpack.title": "Усе своє ношу з собою...",
+  "advancements.all_with_you.obtain_backpack.description": "Виготовте або знайдіть рюкзак",
+  "advancements.all_with_you.full_backpack.title": "А не репне?",
+  "advancements.all_with_you.full_backpack.description": "Наповніть рюкзак під зав'язку"
+}
