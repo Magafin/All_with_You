@@ -14,18 +14,14 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.Optional;
 
-// Добавляем автоматическую подписку на шину мода
 @EventBusSubscriber(modid = "all_with_you", bus = EventBusSubscriber.Bus.MOD)
 public class ModTriggers {
 
-    // Объект нашего триггера
     public static final FullBackpackTrigger FULL_BACKPACK = new FullBackpackTrigger();
 
-    // Метод регистрации, который вызывается NeoForge в нужный момент
     @SubscribeEvent
     public static void register(RegisterEvent event) {
         event.register(Registries.TRIGGER_TYPE, helper -> {
-            // "all_with_you:full_backpack" — этот ID должен совпадать с тем, что ты написал в JSON-файле достижения
             helper.register(ResourceLocation.fromNamespaceAndPath("all_with_you", "full_backpack"), FULL_BACKPACK);
         });
     }

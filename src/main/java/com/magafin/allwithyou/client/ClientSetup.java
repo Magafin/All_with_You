@@ -76,7 +76,6 @@ public class ClientSetup {
         if (event.getPackType() == PackType.CLIENT_RESOURCES) {
             String modId = "all_with_you";
 
-            // Список всех твоих паков: "папка" -> "Название в игре"
             Map<String, String> packs = Map.of(
                     "nomansland_compat", "All with You: No Man's Land",
                     "darkmode", "All with You: Dark Mode",

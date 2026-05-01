@@ -4,6 +4,7 @@ import com.magafin.allwithyou.common.item.BackpackItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 

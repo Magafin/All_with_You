@@ -82,15 +82,10 @@ public class BackpackItem extends BundleItem implements Equipable {
     public static boolean isForbiddenContainer(ItemStack stack) {
         if (stack.isEmpty()) return false;
 
-        // 1. Самая важная ванильная проверка.
-        // Она возвращает 'false' для Шалкеров, поэтому мы инвертируем (!).
         if (!stack.getItem().canFitInsideContainerItems()) {
             return true;
         }
 
-        // 2. Запрещаем класть мешочки в мешочки (и рюкзаки в рюкзаки).
-        // Так как твой BackpackItem наследуется от BundleItem, это условие
-        // автоматически запретит класть и ванильные мешочки, и твои рюкзаки друг в друга.
         if (stack.getItem() instanceof net.minecraft.world.item.BundleItem) {
             return true;
         }
@@ -229,7 +224,6 @@ public class BackpackItem extends BundleItem implements Equipable {
         backpack.set(net.minecraft.core.component.DataComponents.BUNDLE_CONTENTS, new net.minecraft.world.item.component.BundleContents(items));
         toInsert.shrink(Math.min(toInsert.getCount(), maxItemsToInsert));
 
-        // Проверка достижения после вставки: если вес достиг лимита[cite: 18]
         if (getContentsWeight(backpack) >= maxCapacity && serverPlayer instanceof ServerPlayer sPlayer) {
             ModTriggers.FULL_BACKPACK.trigger(sPlayer);
         }
@@ -270,7 +264,6 @@ public class BackpackItem extends BundleItem implements Equipable {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        // Полоска видна только если вес больше 0
         return getContentsWeight(stack) > 0;
     }
 
@@ -298,7 +291,7 @@ public class BackpackItem extends BundleItem implements Equipable {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         int currentWeight = getContentsWeight(stack);
-        int maxCapacity = Config.BACKPACK_CAPACITY.get(); // БЕРЕМ ИЗ КОНФИГА
+        int maxCapacity = Config.BACKPACK_CAPACITY.get();
         tooltipComponents.add(Component.translatable("item.minecraft.bundle.fullness", currentWeight, maxCapacity).withStyle(ChatFormatting.GRAY));
     }
     @Override

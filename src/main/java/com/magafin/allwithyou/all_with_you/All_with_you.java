@@ -1,11 +1,8 @@
 package com.magafin.allwithyou.all_with_you;
 
-import com.magafin.allwithyou.common.advancements.ModTriggers;
 import com.magafin.allwithyou.common.register.DataComponentsReg;
 import com.magafin.allwithyou.common.register.ItemsReg;
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
