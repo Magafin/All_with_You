@@ -8,8 +8,8 @@
   "message.all_with_you.backpack.no_space": "没有足够的空间",
   "message.all_with_you.backpack.full": "小背包满了！",
   "message.all_with_you.backpack.forbidden": "这个物品无法放入小背包",
-  "advancements.all_with_you.obtain_backpack.title": "All with me",
-  "advancements.all_with_you.obtain_backpack.description": "Obtain a Backpack",
-  "advancements.all_with_you.full_backpack.title": "Full Limits",
-  "advancements.all_with_you.full_backpack.description": "Pack your backpack to the brim"
+  "advancements.all_with_you.obtain_backpack.title": "与你同在",
+  "advancements.all_with_you.obtain_backpack.description": "背包在手！",
+  "advancements.all_with_you.full_backpack.title": "满满当当",
+  "advancements.all_with_you.full_backpack.description": "把背包填满"
 }
