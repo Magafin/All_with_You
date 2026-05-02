@@ -19,6 +19,8 @@ import net.minecraft.world.item.ItemStack;
 public class BackpackLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
     private final BackpackOnPlayer backpackModel;
 
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("all_with_you", "textures/entity/backpack_model.png");
+
     public BackpackLayer(RenderLayerParent<T, M> renderer) {
         super(renderer);
         this.backpackModel = new BackpackOnPlayer(Minecraft.getInstance().getEntityModels().bakeLayer(BackpackOnPlayer.LAYER_LOCATION));

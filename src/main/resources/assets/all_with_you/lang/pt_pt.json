@@ -1,5 +1,5 @@
 {
-  "credits.translate": "Thanks, Apenaz",
+  "credits.translate": "Thanks, Apenaz and Theseus",
 
   "item.all_with_you.backpack": "Mochila",
 
@@ -8,8 +8,8 @@
   "message.all_with_you.backpack.no_space": "Espaço insuficiente",
   "message.all_with_you.backpack.full": "A mochila está cheia!",
   "message.all_with_you.backpack.forbidden": "Este artigo não pode ser colocado na mochila.",
-  "advancements.all_with_you.obtain_backpack.title": "All with me",
-  "advancements.all_with_you.obtain_backpack.description": "Obtain a Backpack",
-  "advancements.all_with_you.full_backpack.title": "Full Limits",
-  "advancements.all_with_you.full_backpack.description": "Pack your backpack to the brim"
+  "advancements.all_with_you.obtain_backpack.title": "Tudo comigo",
+  "advancements.all_with_you.obtain_backpack.description": "Obtenha uma Mochila",
+  "advancements.all_with_you.full_backpack.title": "Limites Plenos",
+  "advancements.all_with_you.full_backpack.description": "Embale a sua mochila até a borda"
 }

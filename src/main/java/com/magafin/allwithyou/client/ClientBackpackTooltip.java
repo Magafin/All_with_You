@@ -78,12 +78,13 @@ public class ClientBackpackTooltip implements ClientTooltipComponent {
 
             graphics.blitSprite(SLOT_SPRITE, x, y, 18, 20);
 
-            graphics.renderItem(stack, x + 1, y + 1);
-            graphics.renderItemDecorations(font, stack, x + 1, y + 1);
-
             if (index == this.selectedIndex) {
                 graphics.blitSprite(SELECTED_SLOT_SPRITE, x, y, 18, 20);
             }
+
+            graphics.renderItem(stack, x + 1, y + 1);
+
+            graphics.renderItemDecorations(font, stack, x + 1, y + 1);
         }
     }
 
