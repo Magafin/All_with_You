@@ -13,6 +13,6 @@
   "advancements.all_with_you.full_backpack.title": "Fino all'orlo",
   "advancements.all_with_you.full_backpack.description": "Riempi il tuo zaino fino all'orlo",
 
-  "item.all_with_you.skeleton_backpack": "Dirty Backpack",
-  "item.all_with_you.zombie_backpack": "Rotten Backpack"
+  "item.all_with_you.skeleton_backpack": "Zaino sporco",
+  "item.all_with_you.zombie_backpack": "Zaino marcio"
 }
