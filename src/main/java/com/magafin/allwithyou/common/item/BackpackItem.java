@@ -288,7 +288,6 @@ public class BackpackItem extends BundleItem implements Equipable {
         int maxCapacity = Config.BACKPACK_CAPACITY.get();
         tooltipComponents.add(Component.translatable("item.minecraft.bundle.fullness", currentWeight, maxCapacity).withStyle(ChatFormatting.GRAY));
     }
-
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {

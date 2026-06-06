@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -30,24 +31,30 @@ public class BackpackLayer<T extends LivingEntity, M extends HumanoidModel<T>> e
         ItemStack chestStack = entity.getItemBySlot(EquipmentSlot.CHEST);
 
         if (chestStack.is(ItemsReg.BACKPACK.get())) {
+            M playerModel = this.getParentModel();
+
             poseStack.pushPose();
 
-            M playerModel = this.getParentModel();
-            playerModel.copyPropertiesTo((HumanoidModel<T>) this.backpackModel);
-            this.backpackModel.body.copyFrom(playerModel.body);
+            playerModel.body.translateAndRotate(poseStack);
+
+            if (playerModel.young) {
+                poseStack.scale(0.5F, 0.5F, 0.5F);
+                poseStack.translate(0.0F, 24.0F / 16.0F, 0.0F);
+            }
+
+            ModelPart backpackMesh = this.backpackModel.body.getChild("backpack_mesh");
 
             net.minecraft.world.item.component.DyedItemColor dyedColor = chestStack.get(DataComponents.DYED_COLOR);
             int colorRgb = dyedColor != null ? dyedColor.rgb() : 0xFFFFFF;
+            int overlayCoords = LivingEntityRenderer.getOverlayCoords(entity, 0.0F);
 
             ResourceLocation baseTexture = ResourceLocation.fromNamespaceAndPath("all_with_you", "textures/entity/backpack_model_base.png");
             VertexConsumer baseConsumer = buffer.getBuffer(RenderType.entityCutoutNoCull(baseTexture));
-
-            this.backpackModel.renderToBuffer(poseStack, baseConsumer, packedLight, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), colorRgb | 0xFF000000);
+            backpackMesh.render(poseStack, baseConsumer, packedLight, overlayCoords, colorRgb | 0xFF000000);
 
             ResourceLocation overlayTexture = ResourceLocation.fromNamespaceAndPath("all_with_you", "textures/entity/backpack_model_overlay.png");
             VertexConsumer overlayConsumer = buffer.getBuffer(RenderType.entityCutoutNoCull(overlayTexture));
-
-            this.backpackModel.renderToBuffer(poseStack, overlayConsumer, packedLight, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 0xFFFFFFFF);
+            backpackMesh.render(poseStack, overlayConsumer, packedLight, overlayCoords, 0xFFFFFFFF);
 
             poseStack.popPose();
         }
