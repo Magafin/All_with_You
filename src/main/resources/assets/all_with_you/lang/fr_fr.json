@@ -13,6 +13,6 @@
   "advancements.all_with_you.full_backpack.title": "Ça ne rentre pas plus !",
   "advancements.all_with_you.full_backpack.description": "Remplis ton sac à dos à ras bord",
 
-  "item.all_with_you.skeleton_backpack": "Dirty Backpack",
-  "item.all_with_you.zombie_backpack": "Rotten Backpack"
+  "item.all_with_you.skeleton_backpack": "Sac à dos sale",
+  "item.all_with_you.zombie_backpack": "Sac à dos putréfié"
 }
