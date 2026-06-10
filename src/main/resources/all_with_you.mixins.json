@@ -1,11 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.magafin.allwithyou.all_with_you.mixin",
+  "package": "com.magafin.allwithyou.common.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
   ],
   "client": [
+    "CapeLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
