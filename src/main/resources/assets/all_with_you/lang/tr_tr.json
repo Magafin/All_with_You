@@ -1,0 +1,16 @@
+{
+  "item.all_with_you.backpack": "Sırt Çantası",
+
+  "key.all_with_you.store_in_backpack": "Sırt Çantasına Aktar",
+  "key.categories.all_with_you": "All with You",
+  "message.all_with_you.backpack.no_space": "Yeterince yer yok",
+  "message.all_with_you.backpack.full": "Sırt Çantası dolu!",
+  "message.all_with_you.backpack.forbidden": "Bu eşya Sırt Çantasına konulamaz",
+  "advancements.all_with_you.obtain_backpack.title": "Hepsi Benimle",
+  "advancements.all_with_you.obtain_backpack.description": "Bir Sırt Çantası elde edin",
+  "advancements.all_with_you.full_backpack.title": "Tam Sınırda!",
+  "advancements.all_with_you.full_backpack.description": "Sırt Çantanızı ağzına kadar doldurun",
+
+  "item.all_with_you.skeleton_backpack": "Kirli Sırt Çantası",
+  "item.all_with_you.zombie_backpack": "Çürümüş Sırt Çantası"
+}
