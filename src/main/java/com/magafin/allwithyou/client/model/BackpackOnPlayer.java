@@ -28,12 +28,8 @@ public class BackpackOnPlayer extends HumanoidModel<LivingEntity> {
 		partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.ZERO);
 		partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
 
-		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
-
-		body.addOrReplaceChild("backpack_mesh", CubeListBuilder.create()
-						.texOffs(0, 0).addBox(-4.0F, 0.0F, 2.0F, 8.0F, 10.0F, 6.0F, new CubeDeformation(0.0F))
-						.texOffs(0, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.6F))
-				, PartPose.ZERO);
+		PartDefinition Body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -10.0F, 2.0F, 8.0F, 10.0F, 6.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 16).addBox(-4.0F, -10.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.6F)), PartPose.offset(0.0F, 10.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
