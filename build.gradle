@@ -75,6 +75,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
     implementation "curse.maven:curios-309927:6529130"
     implementation "curse.maven:mannequins-488506:7237135"
+    implementation "curse.maven:selene-499980:8426304"
+    implementation "curse.maven:supplementaries-412082:8449469"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
