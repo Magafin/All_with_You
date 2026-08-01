@@ -4,6 +4,7 @@
   "package": "com.magafin.allwithyou.common.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "SupplementariesCompatMixin"
   ],
   "client": [
     "CapeLayerMixin"

@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
@@ -128,7 +129,7 @@ public class BackpackItem extends BundleItem implements Equipable {
     }
 
     @Override
-    public java.util.Optional<net.minecraft.world.inventory.tooltip.TooltipComponent> getTooltipImage(ItemStack stack) {
+    public java.util.Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
         int selectedIndex = stack.getOrDefault(com.magafin.allwithyou.common.register.DataComponentsReg.SELECTED_ITEM_INDEX.get(), 0);
 
         net.minecraft.world.item.component.DyedItemColor dyedColor = stack.get(net.minecraft.core.component.DataComponents.DYED_COLOR);

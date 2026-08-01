@@ -1,5 +1,6 @@
 package com.magafin.allwithyou.common.config;
 
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class Config {
@@ -15,6 +16,7 @@ public class Config {
     public static final ModConfigSpec.IntValue WEIGHT_2;
     public static final ModConfigSpec.IntValue WEIGHT_3;
     public static final ModConfigSpec.IntValue WEIGHT_4;
+    public static final ModConfigSpec.BooleanValue SUPPLEMENTARIES_COMPAT;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -61,8 +63,17 @@ public class Config {
                 .comment("Fourth level penalty.")
                 .defineInRange("weight_4", 8, 4, 36);
 
+        SUPPLEMENTARIES_COMPAT =builder.
+                comment("use Supplementaries overencumbered effect for tiredness")
+                .define("supplementaries_compat", true);
+
         builder.pop();
 
         SERVER_SPEC = builder.build();
+    }
+
+
+    public static boolean supplementaries(){
+        return Config.SUPPLEMENTARIES_COMPAT.getAsBoolean()&& ModList.get().isLoaded("supplementaries");
     }
 }

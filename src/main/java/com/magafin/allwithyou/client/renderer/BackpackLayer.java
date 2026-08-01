@@ -4,6 +4,7 @@ import com.magafin.allwithyou.client.model.BackpackOnPlayer;
 import com.magafin.allwithyou.common.register.ItemsReg;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import dev.hardaway.mannequins.client.model.TranslatedHumanoid;
 import dev.hardaway.mannequins.common.entity.ClientDummy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -37,16 +38,12 @@ public class BackpackLayer<T extends LivingEntity, M extends HumanoidModel<T>> e
             M playerModel = this.getParentModel();
             poseStack.pushPose();
 
-            playerModel.body.translateAndRotate(poseStack);
-
             if (playerModel.young) {
                 poseStack.scale(0.5F, 0.5F, 0.5F);
                 poseStack.translate(0.0F, 24.0F / 16.0F, 0.0F);
             }
-            if(entity instanceof ClientDummy dummy){
-                Rotations bodyRot=dummy.getDummy().getPose().body();
-                this.backpackModel.body.setRotation((float) Math.toRadians(bodyRot.getX()), (float) Math.toRadians(bodyRot.getY()), (float) Math.toRadians(bodyRot.getZ()));
-                poseStack.translate(0.0F, 12.0F / 16.0F, 0.0F);
+            if(playerModel instanceof TranslatedHumanoid humanoid){
+                humanoid.translateToBody(poseStack);
             }
 
             ModelPart backpackMesh = this.backpackModel.body;

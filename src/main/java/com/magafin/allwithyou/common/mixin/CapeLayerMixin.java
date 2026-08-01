@@ -20,11 +20,9 @@ public class CapeLayerMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void allwithyou$hideCapeIfBackpackEquipped(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
-        // Проверяем, что надето в слоте груди
+    private void hideCapeIfBackpackEquipped(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
         ItemStack chestItem = player.getItemBySlot(EquipmentSlot.CHEST);
 
-        // Если это наш рюкзак — отменяем рендер плаща
         if (chestItem.is(ItemsReg.BACKPACK.get())) {
             ci.cancel();
         }
